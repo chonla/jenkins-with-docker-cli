@@ -1,0 +1,18 @@
+version: '3'
+services:
+  jenkins:
+    build: ./docker/jenkins
+    ports:
+      - 80:8080
+      - 50000:50000
+    volumes:
+      - ./docker/jenkins/data:/opt
+      - ./docker/jenkins/home:/var/jenkins_home
+    args:
+      docker-cli-version: '1.25.4'
+      docker-repo-fingerprint: '0EBFCD88'
+    environment:
+      - JENKINS_USERNAME=admin
+      - JENKINS_PASSWORD=admin@1234
+      - JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
+      - JENKINS_UC_DOWNLOAD=http://mirrors.jenkins-ci.org
