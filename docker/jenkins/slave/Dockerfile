@@ -7,8 +7,6 @@ ENV GOSU_VERSION=1.11 \
     SWARM_VERSION=3.18 \
     MD5=09b86c29b9fd0479abe760bba9628a90
 
-RUN ls .
-
 # grab gosu for easy step-down from root
 RUN apt-get update \
  && apt-get install -y --no-install-recommends ca-certificates wget bzip2 python \
@@ -31,8 +29,6 @@ RUN mkdir -p /var/jenkins_home \
  && useradd -d /var/jenkins_home/slave -u 1000 -m -s /bin/bash jenkins \
  && curl -o /bin/swarm-client.jar -SL https://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/$SWARM_VERSION/swarm-client-$SWARM_VERSION.jar \
  && echo "$MD5  /bin/swarm-client.jar" | md5sum -c -
-
-# COPY ./docker-entrypoint.sh /
 
 VOLUME /var/jenkins_home/slave
 WORKDIR /var/jenkins_home/slave
