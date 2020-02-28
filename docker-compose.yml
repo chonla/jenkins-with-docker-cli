@@ -1,18 +1,75 @@
-version: '3'
+version: "3"
+
 services:
-  jenkins:
-    build: ./docker/jenkins
+
+  master:
+    build:
+      context: ./docker/jenkins/master
     ports:
-      - 80:8080
-      - 50000:50000
-    volumes:
-      - ./docker/jenkins/data:/opt
-      - ./docker/jenkins/home:/var/jenkins_home
-    args:
-      docker-cli-version: '1.25.4'
-      docker-repo-fingerprint: '0EBFCD88'
+      - "80:8080"
     environment:
+      - JAVA_OPTS="-Xmx2048m -Djenkins.install.runSetupWizard=false"
       - JENKINS_USERNAME=admin
-      - JENKINS_PASSWORD=admin@1234
-      - JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
+      - JENKINS_PASSWORD=cvf,bo
       - JENKINS_UC_DOWNLOAD=http://mirrors.jenkins-ci.org
+    volumes:
+      - ./docker/jenkins/master/data:/opt
+      - ./docker/jenkins/master/home:/var/jenkins_home
+
+  slave:
+    build:
+      context: ./docker/jenkins/slave
+    environment:
+      - JAVA_OPTS=-Xmx2048m
+      - JENKINS_MASTER=http://master:8080
+      - JENKINS_SLAVE_NAME=slave
+      - JENKINS_USERNAME=admin
+      - JENKINS_PASSWORD=cvf,bo
+      - JENKINS_RETRY=10
+    volumes:
+      - ./docker/jenkins/slave/home:/var/jenkins_home
+
+# volumes:
+#   jenkins-master:
+#   jenkins-worker:
+
+
+# version: '3'
+# services:
+#   master:
+#     build: 
+#       context: ./docker/jenkins/master
+#       args:
+#         docker_cli_version: '1.25.4'
+#         docker_repo_fingerprint: '0EBFCD88'
+#     ports:
+#       - 80:8080
+#       - 50000:50000
+#     volumes:
+#       - ./docker/jenkins/master/data:/opt
+#       - ./docker/jenkins/master/home:/var/jenkins_home
+#     environment:
+#       - JENKINS_USERNAME=admin
+#       - JENKINS_PASSWORD=admin@1234
+#       - JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
+#       - JENKINS_UC_DOWNLOAD=http://mirrors.jenkins-ci.org
+#     networks:
+#       - jenkins_net
+#   slave:
+#     build:
+#       context: ./docker/jenkins/slave
+#       args:
+#         jenkins_url: 'http://master:8080'
+#         jenkins_username: 'admin'
+#         jenkins_password: 'admin@1234'
+#         jenkins_agent_name: 'spartan'
+#     environment: 
+#       - JENKINS_TUNNEL=master:8080
+#       - JENKINS_AGENT_NAME=spartan
+#       - JENKINS_USERNAME=admin
+#       - JENKINS_PASSWORD=admin@1234
+#     networks:
+#       - jenkins_net
+    
+# networks:
+#   jenkins_net:

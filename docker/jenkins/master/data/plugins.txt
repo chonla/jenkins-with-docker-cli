@@ -1,0 +1,15 @@
+dashboard-view:2.12
+cloudbees-folder:6.11.1
+build-name-setter:2.0.4
+build-timeout:1.19
+timestamper:1.10
+ws-cleanup:0.38
+workflow-aggregator:2.6
+parameterized-trigger:2.36
+copyartifact:1.43
+git:4.1.1
+git-parameter:
+ssh:2.6.1
+publish-over-ssh:1.20.1
+greenballs:1.15
+swarm:3.18
