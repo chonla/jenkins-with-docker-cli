@@ -100,6 +100,9 @@ fi
 echo "Fixing permissions"
 chown -v jenkins:jenkins /var/jenkins_home/slave/
 
+echo "Fixing docker permission"
+chmod 666 /var/run/docker.sock
+
 if [ ! -e /var/jenkins_home/slave/.ssh/id_rsa.pub ]; then
   gosu jenkins ssh-keygen -q -N "" -f /var/jenkins_home/slave/.ssh/id_rsa
   echo "Jenkins Slave SSH public key is:"

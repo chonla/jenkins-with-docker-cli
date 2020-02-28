@@ -27,3 +27,5 @@ services:
       - JENKINS_PASSWORD=cvf,bo
       - JENKINS_EXECUTORS=5
       - JENKINS_RETRY=10
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
