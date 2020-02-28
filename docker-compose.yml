@@ -8,7 +8,7 @@ services:
     ports:
       - "80:8080"
     environment:
-      - JAVA_OPTS="-Xmx2048m -Djenkins.install.runSetupWizard=false"
+      - JAVA_OPTS=-Xmx2048m
       - JENKINS_USERNAME=admin
       - JENKINS_PASSWORD=cvf,bo
       - JENKINS_UC_DOWNLOAD=http://mirrors.jenkins-ci.org
