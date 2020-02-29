@@ -112,14 +112,11 @@ if [ ! -e /var/jenkins_home/slave/.ssh/id_rsa.pub ]; then
 fi
 
 if [ "$1" = "java" ]; then
-  echo "1) gosu jenkins java $JAVA_OPTS -jar /bin/swarm-client.jar -fsroot /var/jenkins_home/slave/ $PARAMS"
   exec gosu jenkins java $JAVA_OPTS -jar /bin/swarm-client.jar -fsroot /var/jenkins_home/slave/ $PARAMS
 fi
 
 if [[ "$1" == "-"* ]]; then
-  echo "2) gosu jenkins java $JAVA_OPTS -jar /bin/swarm-client.jar -fsroot /var/jenkins_home/slave/ $PARAMS $@"
   exec gosu jenkins java $JAVA_OPTS -jar /bin/swarm-client.jar -fsroot /var/jenkins_home/slave/ $PARAMS "$@"
 fi
 
-echo "3) $@"
 exec "$@"

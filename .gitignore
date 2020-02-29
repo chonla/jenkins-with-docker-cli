@@ -1,3 +1,4 @@
 docker/jenkins/master/home/
-!docker/jenkins/master/home/bypass.groovy
+!docker/jenkins/master/home/init.groovy.d/bypass.groovy
 docker/jenkins/slave/home/
+**/.DS_Store
