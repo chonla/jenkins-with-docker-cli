@@ -6,6 +6,8 @@ WORKDIR /opt
 # Install plugins
 RUN /usr/local/bin/install-plugins.sh < /opt/plugins.txt
 
+RUN chown jenkins:jenkins -R /var/jenkins_home
+
 # Bypass unlock
 RUN mkdir /var/jenkins_home/init.groovy.d && cp bypass.groovy /var/jenkins_home/init.groovy.d/bypass.groovy
 
