@@ -1,1 +1,4 @@
 **/.DS_Store
+docker/jenkins/master/home/.owner
+docker/jenkins/master/home/logs/
+docker/jenkins/master/home/queue.xml

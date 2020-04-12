@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.222
+FROM jenkins/jenkins:2.230
 
 ADD ./data /opt
 WORKDIR /opt
